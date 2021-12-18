@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 74px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #545454;
+    box-sizing: border-box;
+    max-width: 880px;
+    margin: 45px auto 0 auto;
+}
+
+@media (max-width: 979px) {
+    .header {
+        max-width: 581px;
+    }
+}
+
+@media (max-width: 619px) {
+    .header {
+        max-width: 100%;
+        min-height: 56px;
+    }
+}

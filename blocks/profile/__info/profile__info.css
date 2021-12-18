@@ -1,0 +1,9 @@
+.profile__info {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-right: 26px;
+}

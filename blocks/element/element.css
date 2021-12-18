@@ -1,0 +1,7 @@
+.element {
+  background-color: #ffffff;
+  min-height: 361px;
+  min-width: 282px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
