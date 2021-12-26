@@ -8,10 +8,10 @@
   cursor: pointer;
   box-sizing: border-box;
   min-width: 150px;
-  min-height: 50px;
+  min-height: 48px;
   margin-left: auto;
   align-self: center;
-  background-image: url(../../../images/cross.png);
+  background-image: url(../../../images/cross.svg);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -31,5 +31,6 @@
   .profile__add-button {
     min-width: 282px;
     margin: 36px auto 0 auto;
+    background-size: 16px;
   }
 }
