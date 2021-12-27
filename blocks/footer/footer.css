@@ -4,11 +4,13 @@
     align-items: flex-start;
     width: 100%;
     color: #545454;
+    margin-bottom: 60px;
 }
 
 @media (max-width: 619px) {
     .footer {
         font-size: 14px;
         line-height: 17px;
+        margin-bottom: 30px;
     }
 }

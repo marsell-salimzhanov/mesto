@@ -18,7 +18,6 @@
     </header>
     <div class="page__container">
       <main class="page__main">
-
         <section class="profile">
           <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
           <div class="profile__info-container">
@@ -26,10 +25,10 @@
               <h1 class="profile__title">Жак-Ив Кусто</h1>
               <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <button type="button" class="profile__edit-button">
+            <button type="button" class="profile__edit-button" aria-label="Редактировать профиль">
             </button>
           </div>
-          <button type="button" class="profile__add-button">
+          <button type="button" class="profile__add-button" aria-label="Добавить">
           </button>
         </section>
 
@@ -40,7 +39,7 @@
               <h3 class="element__title">
                 Карачаевск
               </h3>
-              <button type="button" class="element__like">
+              <button type="button" class="element__like" aria-label="Лайк">
               </button>
             </div>
           </article>
@@ -51,7 +50,7 @@
               <h3 class="element__title">
                 Гора Эльбрус
               </h3>
-              <button type="button" class="element__like">
+              <button type="button" class="element__like" aria-label="Лайк">
               </button>
             </div>
           </article>
@@ -62,7 +61,7 @@
               <h3 class="element__title">
                 Домбай
               </h3>
-              <button type="button" class="element__like">
+              <button type="button" class="element__like" aria-label="Лайк">
               </button>
             </div>
           </article>
@@ -73,7 +72,7 @@
               <h3 class="element__title">
                 Гора Эльбрус
               </h3>
-              <button type="button" class="element__like">
+              <button type="button" class="element__like" aria-label="Лайк">
               </button>
             </div>
           </article>
@@ -84,7 +83,7 @@
               <h3 class="element__title">
                 Домбай
               </h3>
-              <button type="button" class="element__like">
+              <button type="button" class="element__like" aria-label="Лайк">
               </button>
             </div>
           </article>
@@ -95,7 +94,7 @@
               <h3 class="element__title">
                 Карачаево-Черкесия
               </h3>
-              <button type="button" class="element__like">
+              <button type="button" class="element__like" aria-label="Лайк">
               </button>
             </div>
           </article>
@@ -113,14 +112,15 @@
   </div>
   <div class="popup">
     <div class="popup__container">
-      <button type="button" class="popup__close">
+      <button type="button" class="popup__close" aria-label="Закрыть">
       </button>
-      <form class="popup__form" name="popup">
+      <form class="popup__form" name="name-job">
         <h2 class="popup__title">
           Редактировать профиль
         </h2>
-        <input class="popup__input popup__input_content_name" type="text" name="name">
-        <input class="popup__input popup__input_content_job" type="text" name="job">
+        <input class="popup__input popup__input_content_name" type="text" name="name" required placeholder="Ваше имя">
+        <input class="popup__input popup__input_content_job" type="text" name="job" required
+          placeholder="Ваша должность">
         <input type="submit" class="popup__save" value="Сохранить">
       </form>
     </div>
