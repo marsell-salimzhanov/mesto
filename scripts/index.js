@@ -70,8 +70,8 @@ function openPopupEdit() {
 
 function hanldeProfileFormSubmit(evt) {
   evt.preventDefault();
-  let newName = nameInput.value;
-  let newJob = jobInput.value;
+  const newName = nameInput.value;
+  const newJob = jobInput.value;
   nameProfile.textContent = newName;
   jobProfile.textContent = newJob;
   closePopup(popupEdit);
@@ -89,7 +89,7 @@ function hanldeCardFormSubmit(evt) {
 }
 
 function createCard(item) {
-  let element = getCard(item);
+  const element = getCard(item);
   elements.prepend(element);
 }
 
@@ -109,16 +109,20 @@ function getCard(el) {
     evt.target.closest('.element').remove();
   });
   elementImage.addEventListener('click', function (evt) {
-    showImage(evt.target);
+    let el = {
+      name: evt.target.getAttribute('alt'),
+      link: evt.target.getAttribute('src')
+    };
+    showImage(el);
   });
   return element;
 }
 
 function showImage(img) {
   openPopup(popupShowImage);
-  image.setAttribute('src', img.getAttribute('src'));
-  image.setAttribute('alt', img.getAttribute('alt'));
-  caption.textContent = img.getAttribute('alt');
+  image.setAttribute('src', img.link);
+  image.setAttribute('alt', img.name);
+  caption.textContent = img.name;
 }
 
 formElementEdit.addEventListener('submit', hanldeProfileFormSubmit);
