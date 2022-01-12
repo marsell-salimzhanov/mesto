@@ -79,7 +79,7 @@ function hanldeProfileFormSubmit(evt) {
 
 function hanldeCardFormSubmit(evt) {
   evt.preventDefault();
-  let card = {
+  const card = {
     name: elementNameInput.value,
     link: elementUrlInput.value
   }
@@ -94,11 +94,11 @@ function createCard(item) {
 }
 
 function getCard(el) {
-  let element = elementTemplate.cloneNode(true);
-  let elementImage = element.querySelector('.element__image');
-  let elementTitle = element.querySelector('.element__title');
-  let elementLike = element.querySelector('.element__like');
-  let elementDelete = element.querySelector('.element__delete');
+  const element = elementTemplate.cloneNode(true);
+  const elementImage = element.querySelector('.element__image');
+  const elementTitle = element.querySelector('.element__title');
+  const elementLike = element.querySelector('.element__like');
+  const elementDelete = element.querySelector('.element__delete');
   elementTitle.textContent = el.name;
   elementImage.setAttribute('src', el.link);
   elementImage.setAttribute('alt', el.name);
@@ -109,11 +109,11 @@ function getCard(el) {
     evt.target.closest('.element').remove();
   });
   elementImage.addEventListener('click', function (evt) {
-    let el = {
+    const img = {
       name: evt.target.getAttribute('alt'),
       link: evt.target.getAttribute('src')
     };
-    showImage(el);
+    showImage(img);
   });
   return element;
 }
