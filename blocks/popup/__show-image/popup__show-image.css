@@ -1,0 +1,9 @@
+.popup__show-image {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
