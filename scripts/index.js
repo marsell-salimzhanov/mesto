@@ -36,36 +36,39 @@ const popupCloseEditButton = popupEdit.querySelector('.popup__close');
 const popupCloseAddButton = popupAdd.querySelector('.popup__close');
 const popupCloseImageShowButton = popupShowImage.querySelector('.popup__close');
 
-let formElementEdit = popupEdit.querySelector('.popup__form');
-let formElementAdd = popupAdd.querySelector('.popup__form');
+const formElementEdit = popupEdit.querySelector('.popup__form');
+const formElementAdd = popupAdd.querySelector('.popup__form');
 
-let nameInput = formElementEdit.querySelector('.popup__input_content_name');
-let jobInput = formElementEdit.querySelector('.popup__input_content_job');
+const nameInput = formElementEdit.querySelector('.popup__input_content_name');
+const jobInput = formElementEdit.querySelector('.popup__input_content_job');
 
-let elementNameInput = formElementAdd.querySelector('.popup__input_content_element-name');
-let elementUrlInput = formElementAdd.querySelector('.popup__input_content_element-url');
+const elementNameInput = formElementAdd.querySelector('.popup__input_content_element-name');
+const elementUrlInput = formElementAdd.querySelector('.popup__input_content_element-url');
 
-let nameProfile = document.querySelector('.profile__title');
-let jobProfile = document.querySelector('.profile__subtitle');
+const nameProfile = document.querySelector('.profile__title');
+const jobProfile = document.querySelector('.profile__subtitle');
 
 const elementTemplate = document.querySelector('.element-template').content;
 const elements = document.querySelector('.elements');
+
+const image = popupShowImage.querySelector('.popup__image');
+const caption = popupShowImage.querySelector('.popup__image-caption');
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
 function openPopupEdit() {
-  popupEdit.classList.add('popup_opened');
+  openPopup(popupEdit);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 }
 
-function openPopupAdd() {
-  popupAdd.classList.add('popup_opened');
-}
-
-function formSubmitHandlerEdit(evt) {
+function hanldeProfileFormSubmit(evt) {
   evt.preventDefault();
   let newName = nameInput.value;
   let newJob = jobInput.value;
@@ -74,7 +77,7 @@ function formSubmitHandlerEdit(evt) {
   closePopup(popupEdit);
 }
 
-function formSubmitHandlerAdd(evt) {
+function hanldeCardFormSubmit(evt) {
   evt.preventDefault();
   let card = {
     name: elementNameInput.value,
@@ -85,12 +88,17 @@ function formSubmitHandlerAdd(evt) {
   formElementAdd.reset();
 }
 
-function createCard(el) {
-  const element = elementTemplate.cloneNode(true);
-  const elementImage = element.querySelector('.element__image');
-  const elementTitle = element.querySelector('.element__title');
-  const elementLike = element.querySelector('.element__like');
-  const elementDelete = element.querySelector('.element__delete');
+function createCard(item) {
+  let element = getCard(item);
+  elements.prepend(element);
+}
+
+function getCard(el) {
+  let element = elementTemplate.cloneNode(true);
+  let elementImage = element.querySelector('.element__image');
+  let elementTitle = element.querySelector('.element__title');
+  let elementLike = element.querySelector('.element__like');
+  let elementDelete = element.querySelector('.element__delete');
   elementTitle.textContent = el.name;
   elementImage.setAttribute('src', el.link);
   elementImage.setAttribute('alt', el.name);
@@ -100,23 +108,25 @@ function createCard(el) {
   elementDelete.addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
   });
-  elementImage.addEventListener('click', showImage);
-  elements.prepend(element);
+  elementImage.addEventListener('click', function (evt) {
+    showImage(evt.target);
+  });
+  return element;
 }
 
 function showImage(img) {
-  popupShowImage.classList.add('popup_opened');
-  let image = popupShowImage.querySelector('.popup__image');
-  let caption = popupShowImage.querySelector('.popup__image-caption');
-  image.setAttribute('src', img.target.getAttribute('src'));
-  image.setAttribute('alt', img.target.getAttribute('alt'));
-  caption.textContent = img.target.getAttribute('alt');
+  openPopup(popupShowImage);
+  image.setAttribute('src', img.getAttribute('src'));
+  image.setAttribute('alt', img.getAttribute('alt'));
+  caption.textContent = img.getAttribute('alt');
 }
 
-formElementEdit.addEventListener('submit', formSubmitHandlerEdit);
-formElementAdd.addEventListener('submit', formSubmitHandlerAdd);
+formElementEdit.addEventListener('submit', hanldeProfileFormSubmit);
+formElementAdd.addEventListener('submit', hanldeCardFormSubmit);
 editButton.addEventListener('click', openPopupEdit);
-addButton.addEventListener('click', openPopupAdd);
+addButton.addEventListener('click', function () {
+  openPopup(popupAdd);
+});
 popupCloseEditButton.addEventListener('click', function () {
   closePopup(popupEdit);
 });
