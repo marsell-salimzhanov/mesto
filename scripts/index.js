@@ -36,14 +36,14 @@ const popupCloseEditButton = popupEdit.querySelector('.popup__close');
 const popupCloseAddButton = popupAdd.querySelector('.popup__close');
 const popupCloseImageShowButton = popupShowImage.querySelector('.popup__close');
 
-const formElementEdit = popupEdit.querySelector('.popup__form');
-const formElementAdd = popupAdd.querySelector('.popup__form');
+const formElementEdit = document.forms.nameJob;
+const formElementAdd = document.forms.addElement;
 
-const nameInput = formElementEdit.querySelector('.popup__input_content_name');
-const jobInput = formElementEdit.querySelector('.popup__input_content_job');
+const nameInput = formElementEdit.elements.name;
+const jobInput = formElementEdit.elements.job;
 
-const elementNameInput = formElementAdd.querySelector('.popup__input_content_element-name');
-const elementUrlInput = formElementAdd.querySelector('.popup__input_content_element-url');
+const elementNameInput = formElementAdd.elements.elementName;
+const elementUrlInput = formElementAdd.elements.elementUrl;
 
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
@@ -56,10 +56,20 @@ const caption = popupShowImage.querySelector('.popup__image-caption');
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEscape);
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEscape);
+}
+
+function closePopupEscape(evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    const openedPopup = document.querySelector('.popup_opened');
+    if (openedPopup) closePopup(openedPopup);
+  }
 }
 
 function openPopupEdit() {
@@ -125,6 +135,10 @@ function showImage(img) {
   caption.textContent = img.name;
 }
 
+function closePopupOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) closePopup(evt.target);
+}
+
 formElementEdit.addEventListener('submit', hanldeProfileFormSubmit);
 formElementAdd.addEventListener('submit', hanldeCardFormSubmit);
 editButton.addEventListener('click', openPopupEdit);
@@ -140,4 +154,7 @@ popupCloseAddButton.addEventListener('click', function () {
 popupCloseImageShowButton.addEventListener('click', function () {
   closePopup(popupShowImage);
 });
+popupEdit.addEventListener('click', closePopupOverlayClick);
+popupAdd.addEventListener('click', closePopupOverlayClick);
+popupShowImage.addEventListener('click', closePopupOverlayClick);
 initialCards.forEach(createCard);

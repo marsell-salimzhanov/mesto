@@ -35,7 +35,6 @@
         <section class="elements">
 
         </section>
-
       </main>
 
       <footer class="footer">
@@ -50,13 +49,16 @@
     <div class="popup__container">
       <button type="button" class="popup__close" aria-label="Закрыть">
       </button>
-      <form class="popup__form" name="name-job">
+      <form class="popup__form" name="nameJob" novalidate>
         <h2 class="popup__title">
           Редактировать профиль
         </h2>
-        <input class="popup__input popup__input_content_name" type="text" name="name" required placeholder="Ваше имя">
+        <input class="popup__input popup__input_content_name" type="text" name="name" required placeholder="Ваше имя"
+          maxlength="40" minlength="2">
+        <span id="name" class="popup__input-error">Текст ошибки</span>
         <input class="popup__input popup__input_content_job" type="text" name="job" required
-          placeholder="Ваша должность">
+          placeholder="Ваша должность" maxlength="200" minlength="2">
+        <span id="job" class="popup__input-error">Текст ошибки</span>
         <input type="submit" class="popup__save" value="Сохранить">
       </form>
     </div>
@@ -66,15 +68,17 @@
     <div class="popup__container">
       <button type="button" class="popup__close" aria-label="Закрыть">
       </button>
-      <form class="popup__form" name="add-element">
+      <form class="popup__form" name="addElement" novalidate>
         <h2 class="popup__title">
           Новое место
         </h2>
-        <input class="popup__input popup__input_content_element-name" type="text" name="element-name" required
-          placeholder="Название">
-        <input class="popup__input popup__input_content_element-url" type="text" name="element-url" required
+        <input class="popup__input popup__input_content_element-name" type="text" name="elementName" required
+          placeholder="Название" maxlength="30" minlength="2">
+        <span id="elementName" class="popup__input-error">Текст ошибки</span>
+        <input class="popup__input popup__input_content_element-url" type="url" name="elementUrl" required
           placeholder="Ссылка на картинку">
-        <input type="submit" class="popup__save" value="Сохранить">
+        <span id="elementUrl" class="popup__input-error">Текст ошибки</span>
+        <input type="submit" class="popup__save" value="Создать">
       </form>
     </div>
   </div>
@@ -103,6 +107,7 @@
     </article>
   </template>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
