@@ -64,9 +64,9 @@ function openPopup(popup) {
   document.addEventListener('keydown', closePopupEscape);
 }
 
-function closePopupEscape(evt) {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
+function closePopupEscape(event) {
+  if (event.key === 'Escape') {
+    event.preventDefault();
     const openedPopup = document.querySelector('.popup_opened');
     if (openedPopup) closePopup(openedPopup);
   }
@@ -78,8 +78,8 @@ function openPopupEdit() {
   jobInput.value = jobProfile.textContent;
 }
 
-function hanldeProfileFormSubmit(evt) {
-  evt.preventDefault();
+function hanldeProfileFormSubmit(event) {
+  event.preventDefault();
   const newName = nameInput.value;
   const newJob = jobInput.value;
   nameProfile.textContent = newName;
@@ -87,8 +87,9 @@ function hanldeProfileFormSubmit(evt) {
   closePopup(popupEdit);
 }
 
-function hanldeCardFormSubmit(evt) {
-  evt.preventDefault();
+
+function hanldeCardFormSubmit(event) {
+  event.preventDefault();
   const card = {
     name: elementNameInput.value,
     link: elementUrlInput.value
@@ -96,6 +97,7 @@ function hanldeCardFormSubmit(evt) {
   createCard(card);
   closePopup(popupAdd);
   formElementAdd.reset();
+  toggleButton(formElementAdd, { submitButtonSelector: '.popup__save', inactiveButtonClass: 'popup__save_inactive' });
 }
 
 function createCard(item) {
@@ -103,40 +105,34 @@ function createCard(item) {
   elements.prepend(element);
 }
 
-function getCard(el) {
+function getCard(card) {
   const element = elementTemplate.cloneNode(true);
   const elementImage = element.querySelector('.element__image');
   const elementTitle = element.querySelector('.element__title');
   const elementLike = element.querySelector('.element__like');
   const elementDelete = element.querySelector('.element__delete');
-  elementTitle.textContent = el.name;
-  elementImage.setAttribute('src', el.link);
-  elementImage.setAttribute('alt', el.name);
-  elementLike.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active');
+  elementTitle.textContent = card.name;
+  elementImage.setAttribute('src', card.link);
+  elementImage.setAttribute('alt', card.name);
+  elementLike.addEventListener('click', function (event) {
+    event.target.classList.toggle('element__like_active');
   });
-  elementDelete.addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove();
+  elementDelete.addEventListener('click', function (event) {
+    event.target.closest('.element').remove();
   });
-  elementImage.addEventListener('click', function (evt) {
-    const img = {
-      name: evt.target.getAttribute('alt'),
-      link: evt.target.getAttribute('src')
-    };
-    showImage(img);
+  elementImage.addEventListener('click', function () {
+    showImage(card);
   });
   return element;
 }
 
-function showImage(img) {
+function showImage(image) {
   openPopup(popupShowImage);
-  image.setAttribute('src', img.link);
-  image.setAttribute('alt', img.name);
-  caption.textContent = img.name;
+  caption.textContent = image.name;
 }
 
-function closePopupOverlayClick(evt) {
-  if (evt.target === evt.currentTarget) closePopup(evt.target);
+function closePopupOverlayClick(event) {
+  if (event.target === event.currentTarget) closePopup(event.target);
 }
 
 formElementEdit.addEventListener('submit', hanldeProfileFormSubmit);

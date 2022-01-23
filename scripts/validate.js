@@ -5,7 +5,7 @@ function sbmitForm(evt) {
 function toggleButton(form, { submitButtonSelector, inactiveButtonClass }) {
   const button = form.querySelector(submitButtonSelector);
   const isFormValid = form.checkValidity();
-  console.log(isFormValid);
+
   if (isFormValid) {
     button.classList.remove(inactiveButtonClass);
     button.removeAttribute('disabled');
