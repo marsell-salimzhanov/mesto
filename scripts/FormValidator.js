@@ -18,7 +18,6 @@ export default class FormValidator {
 
     this._inputs.forEach((input) => {
       input.addEventListener('input', () => {
-        console.log(this);
         this._validateInput(input);
 
       }
