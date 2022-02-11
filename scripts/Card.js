@@ -1,10 +1,18 @@
-import { popupShowImage, openPopup } from './index.js';
+import { openPopup } from './index.js';
 
 export default class Card {
-  constructor(data, selector) {
+  constructor(data, selector, popUpSelector) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
+    this._popUp = document.querySelector(popUpSelector);
+    this._popUpImage = this._popUp.querySelector('.popup__image');
+    this._popUpCaption = this._popUp.querySelector('.popup__image-caption');
+    this._element = this._getElement();
+    this._elementImage = this._element.querySelector('.element__image');
+    this._elementTitle = this._element.querySelector('.element__title');
+    this._elementLike = this._element.querySelector('.element__like');
+    this._elementDelete = this._element.querySelector('.element__delete');
   }
 
   _getElement() {
@@ -18,10 +26,9 @@ export default class Card {
 
 
   generate() {
-    this._element = this._getElement();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
-    this._element.querySelector('.element__title').textContent = this._name;
+    this._elementImage.src = this._link;
+    this._elementImage.alt = this._name;
+    this._elementTitle.textContent = this._name;
 
     this._setEventListeners();
 
@@ -29,32 +36,32 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__like').addEventListener('click', () => {
+    this._elementLike.addEventListener('click', () => {
       this._toggleLike();
     });
 
-    this._element.querySelector('.element__delete').addEventListener('click', () => {
+    this._elementDelete.addEventListener('click', () => {
       this._deleteElement();
     });
 
-    this._element.querySelector('.element__image').addEventListener('click', () => {
+    this._elementImage.addEventListener('click', () => {
       this._showImage();
     });
   }
 
   _toggleLike() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    this._elementLike.classList.toggle('element__like_active');
   }
 
   _deleteElement() {
-    this._element.querySelector('.element__delete').closest('.element').remove();
+    this._elementDelete.closest('.element').remove();
   }
 
   _showImage() {
-    popupShowImage.querySelector('.popup__image').src = this._link;
-    popupShowImage.querySelector('.popup__image').alt = this._name;
-    popupShowImage.querySelector('.popup__image-caption').textContent = this._name;
-    openPopup(popupShowImage);
+    this._popUpImage.src = this._link;
+    this._popUpImage.alt = this._name;
+    this._popUpCaption.textContent = this._name;
+    openPopup(this._popUp);
   }
 }
 
