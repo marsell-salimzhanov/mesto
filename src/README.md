@@ -24,5 +24,5 @@
 https://marsell-salimzhanov.github.io/mesto/
 
 **Технлогии**
-Grid, Flex
+Grid, Flex, JavaScript,Webpac
 

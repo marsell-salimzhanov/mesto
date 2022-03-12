@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="./pages/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
 </head>
@@ -13,13 +12,13 @@
 
     <header class="header">
 
-      <img class="header__logo" src="./images/logo.svg" alt="Место">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Место">
 
     </header>
     <div class="page__container">
       <main class="page__main">
         <section class="profile">
-          <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
           <div class="profile__info-container">
             <div class="profile__info">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -106,7 +105,6 @@
       </div>
     </article>
   </template>
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
