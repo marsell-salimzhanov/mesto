@@ -11,10 +11,6 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    this._form.addEventListener('submit', function (event) {
-      event.preventDefault();
-    });
-
     this._inputs.forEach((input) => {
       input.addEventListener('input', () => {
         this._validateInput(input);
@@ -59,6 +55,14 @@ export default class FormValidator {
     input.classList.remove(this._inputErrorClass);
     errorSpan.classList.remove(this._errorClass);
     errorSpan.textContent = 'Текст ошибки';
+  }
+
+  resetError() {
+    this._inputs.forEach((input) => {
+      const spanId = input.getAttribute('name');
+      const errorSpan = this._form.querySelector(`#${spanId}`);
+      this._hideError(input, errorSpan);
+    });
   }
 }
 
