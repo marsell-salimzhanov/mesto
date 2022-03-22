@@ -8,6 +8,7 @@ export default class FormValidator {
     this._form = form;
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._inputs = this._form.querySelectorAll(this._inputSelector);
+
   }
 
   enableValidation() {

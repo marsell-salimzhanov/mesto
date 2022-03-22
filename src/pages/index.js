@@ -55,9 +55,8 @@ const popupAdd = new PopupWithForm('.popup_type_add-element', (data) => {
     .then(res => {
       const cardElement = createCard(res);
       cardList.addItem(cardElement);
-      formElementAdd.reset();
-      formAddValidator.toggleButton();
       popupAdd.close();
+      formAddValidator.toggleButton();
     })
     .catch(err => console.log(err))
     .finally(() => popupAdd.renameButtonSave(false));
@@ -75,18 +74,17 @@ const popupAvatar = new PopupWithForm('.popup_type_edit-avatar', (data) => {
     .finally(() => popupAvatar.renameButtonSave(false));
 });
 
-api.getProfile()
-  .then(res => {
-    userId = res._id;
-    userInfo.setUserInfo(res.name, res.about);
-  });
-
-api.getInitialCards()
-  .then(cards => {
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData.name, userData.about);
     cards.forEach(data => {
       const card = createCard(data);
       cardList.addItem(card);
     })
+  })
+  .catch(err => {
+    console.log(err);
   });
 
 function createCard(data) {
@@ -113,25 +111,30 @@ function createCard(data) {
         api.addLike(id)
           .then(res => {
             card.setLikes(res.likes);
-          });
-        card.userHasLike = true;
+            card.toggleLike();
+            card.userHasLike = true;
+          })
+          .catch(err => console.log(err));
+
       }
       else {
         api.deleteLike(id)
           .then(res => {
             card.setLikes(res.likes);
-          });
-        card.userHasLike = false;
+            card.toggleLike();
+            card.userHasLike = false;
+          })
+          .catch(err => console.log(err));
       }
-
     }
   );
   return card.generate();
 }
 
 editButton.addEventListener('click', () => {
-  formElementEdit.elements.name.value = userInfo.getUserInfo().name;
-  formElementEdit.elements.job.value = userInfo.getUserInfo().job;
+  const { name, job } = userInfo.getUserInfo();
+  formElementEdit.elements.name.value = name;
+  formElementEdit.elements.job.value = job;
   formProfileValidator.toggleButton();
   formProfileValidator.resetError();
   popupEdit.open();
@@ -144,6 +147,7 @@ addButton.addEventListener('click', () => {
 
 avatarEditButton.addEventListener('click', () => {
   formAvatarValidator.resetError();
+  formAvatarValidator.toggleButton();
   popupAvatar.open();
 });
 
@@ -155,4 +159,3 @@ popupDeleteConfirm.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
 popupAvatar.setEventListeners();
-cardList.renderItems();

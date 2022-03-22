@@ -34,18 +34,17 @@ export default class Card {
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
     this._elementTitle.textContent = this._name;
-
+    if (this.userHasLike) this.toggleLike();
     this._setEventListeners();
     this.setLikes(this._likes);
-    if (this._userId != this._owner) this._elementDelete.style.display = 'none'
-    if (this.userHasLike) this._toggleLike();
+    if (this._userId != this._owner) this._elementDelete.style.display = 'none';
+
     return this._element;
   }
 
   _setEventListeners() {
     this._elementLike.addEventListener('click', () => {
       this.handleLikeClick(this._id);
-      this._toggleLike();
     });
 
     this._elementDelete.addEventListener('click', () => this.handleDeleteClick(this._id));
@@ -55,7 +54,7 @@ export default class Card {
     });
   }
 
-  _toggleLike() {
+  toggleLike() {
     this._elementLike.classList.toggle('element__like_active');
   }
 
@@ -65,6 +64,8 @@ export default class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes;
+
     this._elementLikeCount.textContent = this._likes.length;
+
   }
 }

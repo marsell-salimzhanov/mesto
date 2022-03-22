@@ -8,16 +8,14 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('Данные пользователя не загружены'))
+      .then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('Ошибка при загрузке карточек'))
+      .then(this._checkResponse);
   }
 
   editProfile(name, about) {
@@ -29,8 +27,7 @@ class Api {
         about
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('Ошибка при загрузке карточек'))
+      .then(this._checkResponse);
   }
 
   addCard(name, link) {
@@ -42,8 +39,7 @@ class Api {
         link
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('Ошибка при загрузке карточек'))
+      .then(this._checkResponse);
   }
 
   deleteCard(cardId) {
@@ -51,8 +47,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('пост удален'))
+      .then(this._checkResponse);
   }
 
   deleteLike(cardId) {
@@ -60,8 +55,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('Лайк удален'))
+      .then(this._checkResponse);
   }
 
   addLike(cardId) {
@@ -69,8 +63,7 @@ class Api {
       method: 'PUT',
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('Лайк добавлен'))
+      .then(this._checkResponse);
   }
 
   editAvatar(avatar) {
@@ -81,10 +74,12 @@ class Api {
         avatar
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(() => console.log('Аватар обновлен'))
+      .then(this._checkResponse);
   }
 
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(res.status);
+  }
 }
 
 export const api = new Api({
