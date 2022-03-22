@@ -1,14 +1,13 @@
 .profile__avatar {
-  width: 120px;
-  height: 120px;
   border-radius: 50%;
-  margin-right: 30px;
   object-fit: cover;
+  cursor: pointer;
+  height: 120px;
+  width: 120px;
 }
 
-@media (max-width: 619px) {
-  .profile__avatar {
-    margin-right: 0;
-    margin-bottom: 22.25px;
-  }
+.profile__avatar:hover {
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
 }

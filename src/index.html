@@ -18,11 +18,14 @@
     <div class="page__container">
       <main class="page__main">
         <section class="profile">
-          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+          <div class="profile__avatar-wrapper">
+            <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+            <button type="button" class="profile__avatar-button"></button>
+          </div>
           <div class="profile__info-container">
             <div class="profile__info">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <p class="profile__subtitle">Исследователь океана</p>
+              <h1 class="profile__title"></h1>
+              <p class="profile__subtitle"></p>
             </div>
             <button type="button" class="profile__edit-button" aria-label="Редактировать профиль">
             </button>
@@ -58,7 +61,8 @@
         <input class="popup__input popup__input_content_job" type="text" name="job" required
           placeholder="Ваша должность" maxlength="200" minlength="2">
         <span id="job" class="popup__input-error">Текст ошибки</span>
-        <input type="submit" class="popup__save" value="Сохранить">
+
+        <button type="submit" class="popup__save">Сохранить</button>
       </form>
     </div>
   </div>
@@ -77,7 +81,23 @@
         <input class="popup__input popup__input_content_element-url" type="url" name="elementUrl" required
           placeholder="Ссылка на картинку">
         <span id="elementUrl" class="popup__input-error">Текст ошибки</span>
-        <input type="submit" class="popup__save" value="Создать">
+        <button type="submit" class="popup__save">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container">
+      <button type="button" class="popup__close" aria-label="Закрыть">
+      </button>
+      <form class="popup__form" name="avatar" novalidate>
+        <h2 class="popup__title">
+          Обновить аватар
+        </h2>
+        <input class="popup__input popup__input_content_avatar-url" type="url" name="avatarUrl" required
+          placeholder="Ссылка на картинку">
+        <span id="avatarUrl" class="popup__input-error">Текст ошибки</span>
+        <button type="submit" class="popup__save">Сохранить</button>
       </form>
     </div>
   </div>
@@ -92,6 +112,18 @@
     </figure>
   </div>
 
+  <div class="popup popup_type_delete-confirm">
+    <div class="popup__container">
+      <button type="button" class="popup__close" aria-label="Закрыть">
+      </button>
+      <form class="popup__form" name="addElement" novalidate>
+        <h2 class="popup__title">
+          Вы уверены?
+        </h2>
+        <button type="submit" class="popup__save">Да</button>
+      </form>
+    </div>
+  </div>
   <template class="element-template">
     <article class="element">
       <button type="button" class="element__delete" aria-label="Удалить">
@@ -100,8 +132,11 @@
       <div class="element__container">
         <h3 class="element__title">
         </h3>
-        <button type="button" class="element__like" aria-label="Лайк">
-        </button>
+        <div class="element__like-container">
+          <button type="button" class="element__like" aria-label="Лайк">
+          </button>
+          <span class="element__like-count"></span>
+        </div>
       </div>
     </article>
   </template>
