@@ -78,10 +78,8 @@ Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData.name, userData.about);
-    cards.forEach(data => {
-      const card = createCard(data);
-      cardList.addItem(card);
-    })
+
+    cardList.renderItems(cards);
   })
   .catch(err => {
     console.log(err);
